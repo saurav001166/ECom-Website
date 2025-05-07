@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-const foodSchema = new mongoose.Schema(
+const rentalItemSchema = new mongoose.Schema(
   {
-    id: Number,
-    name: String,
-    price: Number,
-    totalPrice: Number,
-    quantity: Number,
-    rating: Number,
-    image: String,
-    userId: String,
+    name: String,            // Name of the rental product
+    category: String,        // Category (Furniture, Electronics, etc.)
+    rentPrice: Number,       // Rent price for the item
+    description: String,     // Short description of the product
+    image: String,           // Image URL or path to the product image
+    rating: { type: Number, default: 0 },  // Rating for the product
   },
-  { timestamps: true }
+  { timestamps: true }      
 );
 
-const Food = mongoose.model("food", foodSchema);
-module.exports = Food;
+
+const RentalItem = mongoose.model("RentalItem", rentalItemSchema);
+
+module.exports = RentalItem;

@@ -10,15 +10,14 @@ import { loginUser, setUser, logoutUser } from "../redux/slices/AuthSlice";
 import { getCart } from "../helper";
 import { setCart } from "../redux/slices/CartSlice";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/ApnaBazarLogo.png"
+import Logo from "../assets/ApnaBazarLogo.png";
+import BlackFriday from '../assets/img.jpg';
+import Offer1 from '../assets/201.jpg';
+import SaleBanner from '../assets/202.jpg';
 
 axios.defaults.withCredentials = true;
 
-const carouselImages = [
-  "https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074075.jpg?semt=ais_hybrid&w=740",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSODCnyMUyG-Z7Qc0SF8-iyR7Dj4ZPAJdI6oEqaW82yg1uvSKBN1SxzqXKNdMzSglLxI0&usqp=CAU",
-  "https://www.shutterstock.com/image-photo/kazan-russia-oct-14-2021-260nw-2057505134.jpg",
-];
+const carouselImages = [BlackFriday, Offer1, SaleBanner];
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -76,20 +75,18 @@ const Navbar = () => {
       <img
         src={carouselImages[currentImage]}
         alt="carousel"
-        className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000"
+        className="absolute top-0 left-0 w-fabsolute top-0 left-0 w-full h-full object-cover object-center transition-opacity duration-1000 h-full object-fill transition-opacity duration-1000"
       />
 
       {/* Overlay with Navigation Content */}
       <nav className="relative z-10 flex flex-col lg:flex-row justify-between items-center bg-black/40 backdrop-blur-sm p-6 text-white">
-      <div className="mb-4 lg:mb-0 flex items-center">
-  <img src={Logo} alt="logo" className="rounded-full w-20 h-20" />
-  
-  <div className="ml-4 flex flex-col">
-    <h1 className="text-3xl font-bold tracking-wide">Apna Bazar</h1>
-    <h3 className="text-xs text-gray-300">{new Date().toUTCString().slice(0, 16)}</h3>
-  </div>
-</div>
-
+        <div className="mb-4 lg:mb-0 flex items-center">
+          <img src={Logo} alt="logo" className="rounded-full w-20 h-20" />
+          <div className="ml-4 flex flex-col">
+            <h1 className="text-3xl font-bold tracking-wide">Apna Bazar</h1>
+            <h3 className="text-xs text-gray-300">{new Date().toUTCString().slice(0, 16)}</h3>
+          </div>
+        </div>
 
         <div className="w-full max-w-md">
           <input

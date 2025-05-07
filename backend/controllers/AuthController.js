@@ -26,10 +26,9 @@ const signup = async (req, res) => {
 
     return res.status(201).json({ success: true, message: "Signup Successful" });
   } catch (error) {
-    return res.status(500).json({ success: false, message: error.message }); // Fixed 'staus' to 'status'
+    return res.status(500).json({ success: false, message: error.message });
   }
 };
-
 
 // LOGIN ROUTE
 const login = async (req, res) => {
@@ -75,10 +74,9 @@ const logout = async (req, res) => {
   }
 };
 
-
 // GET USER ROUTE
 const getUser = async (req, res) => {
-  const reqId = req.id;
+  const reqId = req.user.id;  // Corrected to req.user.id (from req.id)
 
   try {
     let user = await User.findById(reqId).select("-password");
@@ -102,7 +100,7 @@ const resetPassword = async (req, res) => {
   try {
     const generateOtp = Math.floor(Math.random() * 10000); // Generate a 4-digit OTP
 
-    let user = await User.findOne({ email });  // Add await here
+    let user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ success: false, message: "Please Signup" });
@@ -138,11 +136,13 @@ const resetPassword = async (req, res) => {
   }
 };
 
-
-
 // VERIFY OTP ROUTE
 const verifyOtp = async (req, res) => {
   const { otp, newPassword } = req.body;
+
+  if (!otp || !newPassword) {
+    return res.status(400).json({ success: false, message: "OTP and password are required" });
+  }
 
   try {
     const securePassword = await bcrypt.hash(newPassword, 10);
@@ -167,5 +167,4 @@ const verifyOtp = async (req, res) => {
   }
 };
 
-
-module.exports = {signup, login, logout, getUser, resetPassword, verifyOtp}
+module.exports = { signup, login, logout, getUser, resetPassword, verifyOtp };

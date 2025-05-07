@@ -9,18 +9,33 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import NewPage from "./pages/New";
+import AddRentalProductPage from "./pages/AddRentalProductPage";
+import CartPage from "./pages/CartPage"; // ✅ Import this
+import Layout from "./components/Layout";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Layout><Home /></Layout>} />
+      <Route path="/add-rental" element={<Layout><AddRentalProductPage /></Layout>} />
+      <Route path="/new-page" element={<Layout><NewPage /></Layout>} />
       <Route path="/success" element={<Success />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forgot-password" element={<ResetPassword />} />
       <Route path="/verify-otp" element={<VerifyOtp />} />
-      <Route path="/new-page" element={<NewPage />} /> {/* ✅ New route */}
-      <Route path="/*" element={<Error />} />
+      
+      
+      <Route
+        
+        element={
+          <ProtectedRoute>
+          
+          </ProtectedRoute>
+        }
+      />
+      
+     
     </Routes>
   );
 };

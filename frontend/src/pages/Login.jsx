@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/slices/AuthSlice";
 import toast from "react-hot-toast";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import loginBg from "../assets/205.jpg";
+import shoppingGif from "../assets/207.gif";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,15 +19,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://flavoro-clone-backend.onrender.com/api/login", {
+      const res = await axios.post("http://localhost:5174/login", {
         email,
         password,
       });
-      const data = await res.data;
 
       if (res.status === 200) {
         dispatch(loginUser());
-        toast.success(data.message);
+        toast.success(res.data.message);
         navigate("/");
       }
     } catch (error) {
@@ -34,80 +35,86 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-100 to-white flex flex-col justify-between">
-      <div className="flex flex-col lg:flex-row items-center justify-center flex-grow px-4 py-10">
-        {/* Left Info Section */}
-        <div className="hidden lg:flex flex-col items-start justify-center text-gray-700 w-1/2 pr-10">
-          <h1 className="text-3xl font-bold mb-4">Welcome to ShopEase!</h1>
-          <p className="text-sm">
-            Your one-stop destination for fashion, groceries, electronics,
-            cosmetics, and even rentals — all in one cart. Sign in to start
-            shopping!
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center px-4"
+      style={{
+        backgroundImage: `url(${loginBg})`,
+      }}
+    >
+      <div className="bg-black bg-opacity-60 w-full max-w-5xl rounded-lg shadow-lg p-8 flex flex-col lg:flex-row items-center justify-between gap-10">
+        
+        {/* Left Info */}
+        <div className="text-white w-full lg:w-1/2 space-y-4">
+          <h1 className="text-4xl font-bold">
+            Apna Bazar: Everything in One Cart
+          </h1>
+          <p className="text-sm text-gray-200">
+            Explore our vast collection of fashion, electronics, groceries,
+            cosmetics, and even rentals. Experience a seamless and powerful
+            shopping journey — all in one place.
           </p>
-        </div>
+          <div className="flex items-center gap-40 mt-4">
+            <button className="px-5 py-2 bg-orange-500 text-white font-semibold rounded hover:bg-orange-600">
+              Join Us
+            </button>
+            <img src={shoppingGif} alt="shopping animation" className="w-40 h-40" />
+          </div>
+        </div> {/* ← This closing tag was missing */}
 
         {/* Login Form */}
         <form
           onSubmit={handleLogin}
-          className="bg-white rounded-lg p-6 shadow-lg flex flex-col gap-4 w-full max-w-sm"
+          className="bg-white w-full max-w-sm p-6 rounded-lg shadow-md flex flex-col gap-4"
         >
-          <h2 className="text-xl font-semibold text-center text-green-600">Login</h2>
+          <h2 className="text-xl font-semibold text-center text-orange-600">
+            Login Here
+          </h2>
           <input
             type="email"
-            name="email"
-            className="border rounded-md px-3 py-2 focus:border-green-400 text-gray-700"
-            placeholder="johndoe@gmail.com"
+            className="border-b border-orange-400 px-3 py-2 text-gray-800 focus:outline-none"
+            placeholder="Enter Email Here"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
-            name="password"
-            className="border rounded-md px-3 py-2 focus:border-green-400 text-gray-700"
-            placeholder="********"
+            className="border-b border-orange-400 px-3 py-2 text-gray-800 focus:outline-none"
+            placeholder="Enter Password Here"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Link to="/forgot-password" className="text-xs text-gray-500 hover:underline">
+          <Link
+            to="/forgot-password"
+            className="text-xs text-right text-gray-500 hover:underline"
+          >
             Forgot Password?
           </Link>
           <button
             type="submit"
-            className="bg-green-500 text-white py-2 rounded-md hover:bg-green-400"
+            className="bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600"
           >
             Login
           </button>
           <p className="text-xs text-center text-gray-600">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-green-600 hover:underline">
+            Don’t have an account?{" "}
+            <Link to="/signup" className="text-orange-600 hover:underline">
               Sign up
             </Link>
           </p>
+
+          {/* Social Media Icons */}
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600 mb-2">Log in with</p>
+            <div className="flex justify-center gap-4 text-orange-600 text-lg">
+              <FaFacebookF />
+              <FaInstagram />
+              <FaTwitter />
+            </div>
+          </div>
         </form>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-green-50 py-4 text-center text-sm text-gray-600">
-        <div className="flex justify-center gap-4 mb-2 text-green-700">
-          <a href="https://facebook.com" target="_blank" rel="noreferrer">
-            <FaFacebookF />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">
-            <FaInstagram />
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noreferrer">
-            <FaTwitter />
-          </a>
-        </div>
-        <p>
-          Need help? Contact us at{" "}
-          <a href="mailto:support@shopease.com" className="text-green-600 underline">
-            support@shopease.com
-          </a>
-        </p>
-      </footer>
     </div>
   );
 };

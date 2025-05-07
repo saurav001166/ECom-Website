@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import CategoryMenu from "../components/CategoryMenu";
-import FoodItems from "../components/FoodItems";
+import ProductItems from "../components/ProductItems";
 import Cart from "../components/Cart";
 import Footer from "../components/Footer";
 import Switch from "../components/Switch";
@@ -23,7 +23,7 @@ const Home = () => {
       <div className="pt-10">
         
         <CategoryMenu />
-        <FoodItems />
+        <ProductItems />
         <Cart />
       </div>
       <Footer />

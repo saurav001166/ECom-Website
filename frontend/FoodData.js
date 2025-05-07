@@ -1,3 +1,5 @@
+
+import bag from "../assets/.jpg";
 const ProductData = [
   {
     id: 1,
@@ -10,9 +12,8 @@ const ProductData = [
   },
   {
     id: 2,
-    img: "https://www.pngall.com/wp-content/uploads/5/T-Shirt-PNG-Free-Image.png",
-    name: "Men's Cotton T-Shirt",
-    price: 799,
+    img: bag,
+    price: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTNCtBpG4M3k_B7pD-l6rFywjkd3_4NQePvLLDdaVDFXXV8w0LX-2BwAVIuYVwNyHSsW3Eft9zidR0uB_dJlkgyVhh9qURhAoWGJ0KclCt5QBzqdaBR1u1nOii7rmv0M6x-uIPN5v4&usqp=CAc",
     desc: "Soft, breathable cotton t-shirt with a slim fit. Perfect for casual wear or layering under jackets.",
     category: "Clothes",
     rating: 4.3,
@@ -136,13 +137,15 @@ const ProductData = [
     },
     {
       id: 16,
-      img: "https://www.pngall.com/wp-content/uploads/5/Women-Bag-PNG-HD-Image.png",
+      img: leatherHandbag,
       name: "Leather Handbag",
       price: 1899,
       desc: "Chic leather handbag for everyday use with ample storage.",
       category: "Clothing",
       rating: 4.6,
+      
     },
+    
     {
       id: 17,
       img: "https://www.pngall.com/wp-content/uploads/5/Powerbank-PNG-HD-Image.png",

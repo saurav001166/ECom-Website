@@ -2,7 +2,7 @@ const Food = require("../models/Food");
 const User = require("../models/User");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-// ADD TO CART ROUTE
+
 const addToCart = async (req, res) => {
   const userId = req.params.id;
   const { id, name, price, rating, image, quantity } = req.body;
@@ -57,9 +57,7 @@ const addToCart = async (req, res) => {
     );
 
     if (!user) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Failed to add to cart" });
+      return res.status(400).json({ success: false, message: "Failed to add to cart" });
     }
 
     return res.status(200).json({ success: true, message: "Added to cart" });
@@ -94,13 +92,9 @@ const removeFromCart = async (req, res) => {
     let food = await Food.findOneAndDelete({ _id: id });
 
     if (!food) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Food not found" });
+      return res .status(400).json({ success: false, message: "Food not found" });
     }
-    return res
-      .status(200)
-      .json({ success: true, message: "Food Removed from cart" });
+    return res.status(200) .json({ success: true, message: "Food Removed from cart" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -128,14 +122,10 @@ const incrementQuantity = async (req, res) => {
     );
 
     if (!food) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Food not found" });
+      return res.status(400).json({ success: false, message: "Food not found" });
     }
 
-    return res
-      .status(200)
-      .json({ success: true, message: "Food quantity incremented", food });
+    return res.status(200).json({ success: true, message: "Food quantity incremented", food });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -161,14 +151,9 @@ const decrementQuantity = async (req, res) => {
     );
 
     if (!food) {
-      return res.status(400).json({
-        success: false,
-        message: "Food not found or quantity already at the maximum",
-      });
+      return res.status(400).json({success: false,message: "Food not found or quantity already at the maximum", });
     }
-    return res
-      .status(200)
-      .json({ success: true, message: "Food quantity decremented", food });
+    return res.status(200).json({ success: true, message: "Food quantity decremented", food });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -198,8 +183,9 @@ const checkout = async (req, res) => {
           quantity: item.quantity,
         };
       }),
-      success_url: "https://flavoro-clone.vercel.app/success",
-      cancel_url: "https://flavoro-clone.vercel.app/",
+      success_url: "http://localhost:5173/success",
+      cancel_url: "http://localhost:5173/cancel",
+      
     });
 
     res.json({ url: session.url });
@@ -222,9 +208,7 @@ const clearCart = async (req, res) => {
     );
 
     if (!deletedItems) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Failed to clear cart" });
+      return res.status(400).json({ success: false, message: "Failed to clear cart" });
     }
 
     return res.status(200).json({ success: true, message: "Order Confirmed" });
